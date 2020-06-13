@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using BookShopWebAPI.Models;
+using Microsoft.AspNetCore.Authentication;
+using BookShopWebAPI.Handlers;
 
 namespace BookShopWebAPI
 {
@@ -33,6 +35,8 @@ namespace BookShopWebAPI
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
+            services.AddAuthentication("BasicAuthentication")
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
             services.AddDbContext<BookShopDBContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("BookShopDB")));
         }
@@ -48,6 +52,8 @@ namespace BookShopWebAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

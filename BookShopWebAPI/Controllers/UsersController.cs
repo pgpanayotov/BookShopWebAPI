@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BookShopWebAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookShopWebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -18,6 +20,21 @@ namespace BookShopWebAPI.Controllers
         public UsersController(BookShopDBContext context)
         {
             _context = context;
+        }
+
+        [HttpGet("GetUser")]
+        public async Task<ActionResult<User>> GetUser()
+        {
+            string emailAddress = HttpContext.User.Identity.Name;
+            var user = await _context.Users.Where(user => user.email_address == emailAddress).FirstOrDefaultAsync();
+
+            user.Password = null;
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
         }
 
         // GET: api/Users

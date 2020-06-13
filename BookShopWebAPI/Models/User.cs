@@ -6,6 +6,7 @@ namespace BookShopWebAPI.Models
     public partial class User
     {
         public string UserId { get; set; }
+        public string email_address { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
