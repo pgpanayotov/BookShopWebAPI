@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -30,16 +31,38 @@ namespace BookShopWebAPI.Handlers
             if (!Request.Headers.ContainsKey("Authorization"))
                 return AuthenticateResult.Fail("Authorization header not found");
 
-            var authenticationHeaderValue = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
-            var bytes = Convert.FromBase64String(authenticationHeaderValue.Parameter);
-            string[] credentials = Encoding.UTF8.GetString(bytes).Split(":");
-            string emailAddress = credentials[0];
-            string password = credentials[1];
+            try
+            {
+                var authenticationHeaderValue = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
+                var bytes = Convert.FromBase64String(authenticationHeaderValue.Parameter);
+                string[] credentials = Encoding.UTF8.GetString(bytes).Split(":");
+                string emailAddress = credentials[0];
+                string password = credentials[1];
 
-            User user = _context.Users.Where(user => user.email_address == emailAddress && user.Password == password).FirstOrDefault();
+                User user = _context.Users.Where(user => user.email_address == emailAddress && user.Password == password).FirstOrDefault();
 
+                if (user == null)
+                    AuthenticateResult.Fail("Invalid Username or Password");
+                else
+                {
+                    var claims = new[] { new Claim(ClaimTypes.Name, user.email_address) };
+                    var identity = new ClaimsIdentity(claims, Scheme.Name);
+                    var principal = new ClaimsPrincipal(identity);
+                    var ticket = new AuthenticationTicket(principal, Scheme.Name);
 
-            return AuthenticateResult.Fail("Need to implement");
+                    AuthenticateResult.Success(ticket);
+                }
+            }
+            catch (Exception)
+            {
+
+                return AuthenticateResult.Fail("Error");
+            }
+
+            
+            
+
+            
         }
     }
 }
