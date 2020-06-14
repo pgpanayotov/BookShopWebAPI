@@ -22,6 +22,20 @@ namespace BookShopWebAPI.Controllers
             _context = context;
         }
 
+        // GET BY Publisher NAME
+        [HttpGet("GetByName/{name}")]
+        public async Task<ActionResult<IEnumerable<User>>> GetAuthorByFName(string name)
+        {
+            List<User> users = _context.Users.Where(auth => auth.FirstName == name).ToList();
+
+            if (users == null)
+            {
+                return NotFound();
+            }
+
+            return users;
+        }
+
         [HttpGet("GetUser")]
         public async Task<ActionResult<User>> GetUser()
         {
