@@ -59,10 +59,10 @@ namespace BookShopWebAPI.Handlers
                 return AuthenticateResult.Fail("Error");
             }
 
-            
-            
 
-            
+            return AuthenticateResult.Fail("");
+
+
         }
     }
 }

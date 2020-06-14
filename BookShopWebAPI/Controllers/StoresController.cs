@@ -20,14 +20,14 @@ namespace BookShopWebAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Stores
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Store>>> GetStores()
         {
             return await _context.Stores.ToListAsync();
         }
 
-        // GET: api/Stores/5
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Store>> GetStore(string id)
         {
@@ -41,9 +41,7 @@ namespace BookShopWebAPI.Controllers
             return store;
         }
 
-        // PUT: api/Stores/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+      
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStore(string id, Store store)
         {
@@ -73,9 +71,7 @@ namespace BookShopWebAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Stores
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        
         [HttpPost]
         public async Task<ActionResult<Store>> PostStore(Store store)
         {
@@ -99,7 +95,7 @@ namespace BookShopWebAPI.Controllers
             return CreatedAtAction("GetStore", new { id = store.StoreId }, store);
         }
 
-        // DELETE: api/Stores/5
+      
         [HttpDelete("{id}")]
         public async Task<ActionResult<Store>> DeleteStore(string id)
         {

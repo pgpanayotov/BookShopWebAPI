@@ -20,14 +20,14 @@ namespace BookShopWebAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Authors
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Author>>> GetAuthors()
         {
             return await _context.Authors.ToListAsync();
         }
 
-        // GET BY Publisher NAME
+
         [HttpGet("GetByFName/{name}")]
         public async Task<ActionResult<IEnumerable<Author>>> GetAuthorByFName(string name)
         {
@@ -41,7 +41,7 @@ namespace BookShopWebAPI.Controllers
             return authors;
         }
 
-        // GET: api/Authors/5
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Author>> GetAuthor(int id)
         {
@@ -55,9 +55,6 @@ namespace BookShopWebAPI.Controllers
             return author;
         }
 
-        // PUT: api/Authors/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAuthor(int id, Author author)
         {
@@ -87,9 +84,6 @@ namespace BookShopWebAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Authors
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Author>> PostAuthor(Author author)
         {
@@ -99,7 +93,7 @@ namespace BookShopWebAPI.Controllers
             return CreatedAtAction("GetAuthor", new { id = author.AuthorId }, author);
         }
 
-        // DELETE: api/Authors/5
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<Author>> DeleteAuthor(int id)
         {

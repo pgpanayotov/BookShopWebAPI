@@ -23,5 +23,13 @@ namespace BookShopWebAPI.Models
         public virtual DbSet<Sale> Sales { get; set; }
         public virtual DbSet<Store> Stores { get; set; }
         public virtual DbSet<User> Users { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Name=BookStoresDB");
+            }
+        }
     }
 }

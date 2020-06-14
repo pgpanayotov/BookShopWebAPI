@@ -21,7 +21,6 @@ namespace BookShopWebAPI.Controllers
             _context = context;
         }
 
-        // GET BY Publisher NAME
         [HttpGet("GetByName/{name}")]
         public async Task<ActionResult<IEnumerable<Publisher>>> GetPublisherByName(string name)
         {
@@ -35,14 +34,14 @@ namespace BookShopWebAPI.Controllers
             return publishers;
         }
 
-        // GET: api/Publishers
+      
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Publisher>>> GetPublishers()
         {
             return await _context.Publishers.ToListAsync();
         }
 
-        // GET: api/Publishers/5
+       
         [HttpGet("{id}")]
         public async Task<ActionResult<Publisher>> GetPublisher(int id)
         {
@@ -56,7 +55,7 @@ namespace BookShopWebAPI.Controllers
             return publisher;
         }
 
-        // GET: api/Publishers/5
+       
         [HttpGet("GetPublisherDetails/{id}")]
         public async Task<ActionResult<Publisher>> GetPublisherDetails(int id)
         {
@@ -76,9 +75,7 @@ namespace BookShopWebAPI.Controllers
             return publisher;
         }
 
-        // PUT: api/Publishers/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPublisher(int id, Publisher publisher)
         {
@@ -108,9 +105,7 @@ namespace BookShopWebAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Publishers
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        
         [HttpPost]
         public async Task<ActionResult<Publisher>> PostPublisher(Publisher publisher)
         {
@@ -120,7 +115,7 @@ namespace BookShopWebAPI.Controllers
             return CreatedAtAction("GetPublisher", new { id = publisher.PubId }, publisher);
         }
 
-        // DELETE: api/Publishers/5
+       
         [HttpDelete("{id}")]
         public async Task<ActionResult<Publisher>> DeletePublisher(int id)
         {
