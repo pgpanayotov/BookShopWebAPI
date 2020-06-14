@@ -5,12 +5,6 @@ namespace BookShopWebAPI.Models
 {
     public partial class Publisher
     {
-        public Publisher()
-        {
-            Books = new HashSet<Book>();
-            Users = new HashSet<User>();
-        }
-
         public int PubId { get; set; }
         public string PublisherName { get; set; }
         public string City { get; set; }

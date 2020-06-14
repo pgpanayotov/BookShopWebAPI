@@ -5,10 +5,6 @@ namespace BookShopWebAPI.Models
 {
     public partial class Store
     {
-        public Store()
-        {
-            Sales = new HashSet<Sale>();
-        }
 
         public string StoreId { get; set; }
         public string StoreName { get; set; }

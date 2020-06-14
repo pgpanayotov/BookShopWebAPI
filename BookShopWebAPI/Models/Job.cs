@@ -5,11 +5,6 @@ namespace BookShopWebAPI.Models
 {
     public partial class Job
     {
-        public Job()
-        {
-            Users = new HashSet<User>();
-        }
-
         public short JobId { get; set; }
         public string JobDesc { get; set; }
 
