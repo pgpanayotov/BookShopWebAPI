@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 
 namespace BookShopWebAPI.Handlers
 {
+    // 
     public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
         private readonly BookShopDBContext _context;
