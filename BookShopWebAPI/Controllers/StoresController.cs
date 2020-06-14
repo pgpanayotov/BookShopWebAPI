@@ -20,7 +20,20 @@ namespace BookShopWebAPI.Controllers
             _context = context;
         }
 
-        
+        //Get Stores by address
+        [HttpGet("GetByAddress/{address}")]
+        public async Task<ActionResult<IEnumerable<Store>>> GetAuthorByAddress(string address)
+        {
+            List<Store> stores = _context.Stores.Where(stor => stor.StoreAddress == address).ToList();
+
+            if (stores == null)
+            {
+                return NotFound();
+            }
+
+            return stores;
+        }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Store>>> GetStores()
         {

@@ -41,6 +41,18 @@ namespace BookShopWebAPI.Controllers
             return authors;
         }
 
+        [HttpGet("GetByPhone/{phone}")]
+        public async Task<ActionResult<IEnumerable<Author>>> GetAuthorByPhone(string phone)
+        {
+            List<Author> authors = _context.Authors.Where(auth => auth.Phone == phone).ToList();
+
+            if (authors == null)
+            {
+                return NotFound();
+            }
+
+            return authors;
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Author>> GetAuthor(int id)

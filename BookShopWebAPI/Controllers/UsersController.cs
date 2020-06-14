@@ -22,7 +22,21 @@ namespace BookShopWebAPI.Controllers
             _context = context;
         }
 
-      
+        //Get User by email address
+        [HttpGet("GetByEmail/{email}")]
+        public async Task<ActionResult<IEnumerable<User>>> GetUserByEmail(string email)
+        {
+            List<User> users = _context.Users.Where(usr => usr.email_address == email).ToList();
+
+            if (users == null)
+            {
+                return NotFound();
+            }
+
+            return users;
+        }
+
+
         [HttpGet("GetByName/{name}")]
         public async Task<ActionResult<IEnumerable<User>>> GetAuthorByFName(string name)
         {
